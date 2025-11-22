@@ -24,7 +24,7 @@ export default function BalanceSheet() {
 
         <div style={{ width: 280, height: 250, boxSizing: 'border-box', border: '1px solid #ddd', borderRadius: 6, padding: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <GrossNotionalLimit
-            value={99}
+            value={99.69}
             min={0}
             max={100}
             title="Gross Notional Limit"

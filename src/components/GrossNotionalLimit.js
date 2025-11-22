@@ -14,24 +14,54 @@ export default function GrossNotionalLimit({
 	needleEnabled = true,
 	needleProps = {},
 }) {
-	const options = useMemo(() => ({
+	const options = useMemo(() => {
+	// Define color stops for the gauge
+	const colorStops = [
+		{ offset: 0, color: '#22c55e' },    // green at 0%
+		{ offset: 0.5, color: '#eab308' },  // yellow at 50%
+		{ offset: 1, color: '#ef4444' }     // red at 100%
+	];
+
+	// Calculate color based on value percentage
+	const percentage = (value - min) / (max - min);
+	let labelColor;
+	
+	if (percentage <= 0.5) {
+		// Interpolate between green and yellow
+		const localPercent = percentage / 0.5;
+		labelColor = percentage <= 0.33 ? '#22c55e' : '#eab308';
+	} else {
+		// Interpolate between yellow and red
+		labelColor = percentage <= 0.75 ? '#eab308' : '#ef4444';
+	}
+
+	return {
 		type: 'radial-gauge',
 		title: { text: title, fontSize: 14 },
 		subtitle: subtitle ? { text: subtitle, fontSize: 12 } : undefined,
 		value,
 		scale: {
-			min,
-			max,
-			label: { enabled: false },
+		min,
+		max,
+		label: { enabled: false },
 		},
-		// incorporate the enabled flag and any additional needle properties
 		needle: { enabled: needleEnabled, ...needleProps },
-		bar: { enabled: true },
+		bar: { 
+		enabled: true,
+		fills: colorStops.map(stop => stop.color),
+		fillOpacity: 1
+		},
 		innerRadiusRatio: 0.6,
 		startAngle: -120,
 		endAngle: 120,
-		label: { enabled: true, fontSize: 16, formatter: (params) => `${params.value.toFixed(2)}%` },
-	}), [value, min, max, title, subtitle, needleEnabled, needleProps]);
+		label: { 
+		enabled: true,
+		fontSize: 24,
+		color: labelColor,
+  			formatter: ({ value }) => `${value.toFixed(2)}%`
+		},
+	};
+	}, [value, min, max, title, subtitle, needleEnabled, needleProps]);
 
 	const wrapperStyle = {
 		width,
