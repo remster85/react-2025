@@ -13,6 +13,9 @@ export default function GrossNotionalLimit({
 	// new props to control the needle
 	needleEnabled = true,
 	needleProps = {},
+	// new prop for tooltip
+	updatedAt = null, // e.g., "2024-11-22 10:30 AM" or Date object
+	showTooltip = true,
 }) {
 
 	function formatHumanNumber(n) {
@@ -114,8 +117,24 @@ export default function GrossNotionalLimit({
 		...style,
 	};
 
+	const tooltipText = useMemo(() => {
+		if (!updatedAt) return '';
+		
+		if (updatedAt instanceof Date) {
+			return `Updated as ${updatedAt.toLocaleString('en-US', {
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit'
+			})}`;
+		}
+		
+		return `Updated as ${updatedAt}`;
+	}, [updatedAt]);
+
 	return (
-		<div style={wrapperStyle}>
+		<div title={tooltipText || undefined} style={wrapperStyle}>
 			<AgGauge options={options} style={{ width: '100%', height: '100%' }} />
 		</div>
 	);

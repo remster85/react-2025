@@ -11,7 +11,7 @@ export default function BalanceSheet() {
     <div>
       {/* Two gauges side-by-side with matching size and thin grey borders */}
       <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', width: '100%' }}>
-        <div style={{ width: 280, height: 250, boxSizing: 'border-box', border: '1px solid #ddd', borderRadius: 6, padding: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div title="Updated as 2024-11-22 10:30 AM" style={{ width: 280, height: 250, boxSizing: 'border-box', border: '1px solid #ddd', borderRadius: 6, padding: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <GrossNotionalLimit
             value={80}
             min={0}
@@ -21,6 +21,7 @@ export default function BalanceSheet() {
             width={260}
             height={200}
             style={{ border: 'none', padding: 0, background: 'transparent' }}
+            updatedAt={new Date()}
           />
         </div>
 
@@ -35,6 +36,7 @@ export default function BalanceSheet() {
             height={200}
             needleEnabled={false}
             style={{ border: 'none', padding: 0, background: 'transparent' }}
+            updatedAt={new Date()}
           />
         </div>
 
