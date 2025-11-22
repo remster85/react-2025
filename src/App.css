@@ -1,0 +1,43 @@
+.App {
+  display: grid;
+  grid-template-rows: auto 1fr; /* header + main */
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color: #0f1724;
+}
+
+.App-header {
+  background: linear-gradient(90deg,#07101a,#0b1220);
+  color: #e6eef8;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.App-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.App-brand{
+  font-weight:700;
+  font-size:18px;
+}
+
+.App-nav{
+  display:flex;
+  gap:12px;
+  margin-left:20px;
+}
+
+.nav-link{ color: #cfe8ff; text-decoration:none; padding:6px 10px; border-radius:6px }
+.nav-link.active{ background: rgba(96,165,250,0.12); color: #60a5fa }
+
+.App-main{
+  padding: 20px;
+  overflow:auto;
+}
+
+/* make route pages take full available height */
+.App-main > * { min-height: calc(100vh - 64px - 40px); }
+
