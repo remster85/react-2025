@@ -17,7 +17,7 @@ export default function BalanceSheet() {
             min={0}
             max={100}
             title="Gross Notional Limit"
-            subtitle="Limit 135B"
+            limit={135000000}
             width={260}
             height={200}
             style={{ border: 'none', padding: 0, background: 'transparent' }}
@@ -30,7 +30,7 @@ export default function BalanceSheet() {
             min={0}
             max={100}
             title="Gross Notional Limit"
-            subtitle="Limit 135B"
+            limit={135000000000}
             width={240}
             height={200}
             needleEnabled={false}
@@ -38,7 +38,6 @@ export default function BalanceSheet() {
           />
         </div>
 
-          {/* High Yield Total Gross Assets box */}
           <div style={{ width: 260, height: 250, boxSizing: 'border-box', border: '1px solid #ddd', borderRadius: 6, padding: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'transparent' }}>
             <HighYieldTotalGrossAssets value={6450987111} />
           </div>
@@ -47,7 +46,7 @@ export default function BalanceSheet() {
           <GrossNotionalLimitRecharts />
         </div>
       </div>
-      {/* second row: Gross Balance Sheet grid */}
+
       <div style={{ marginTop: 20 }}>
         <GrossBalanceSheet rowCount={80} />
       </div>

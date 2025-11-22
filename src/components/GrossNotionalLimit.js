@@ -6,7 +6,7 @@ export default function GrossNotionalLimit({
 	min = 0,
 	max = 100,
 	title = 'Gross Notional Limit',
-	subtitle = '',
+	limit = 0,
 	width = 260,
 	height = 200,
 	style = {},
@@ -14,6 +14,46 @@ export default function GrossNotionalLimit({
 	needleEnabled = true,
 	needleProps = {},
 }) {
+
+	function formatHumanNumber(n) {
+		if (n == null || Number.isNaN(Number(n))) return String(n);
+		const num = Number(n);
+		const abs = Math.abs(num);
+		const units = [
+			{ value: 1e12, symbol: 'T' },
+			{ value: 1e9, symbol: 'B' },
+			{ value: 1e6, symbol: 'M' },
+			{ value: 1e3, symbol: 'K' },
+		];
+		for (const u of units) {
+			if (abs >= u.value) {
+				const v = num / u.value;
+				// choose decimals: no decimals for >=100, 1 decimal for >=10, else 2
+				const decimals = Math.abs(v) >= 100 ? 0 : Math.abs(v) >= 10 ? 1 : 2;
+				return `${v.toFixed(decimals)}${u.symbol}`;
+			}
+		}
+		return num.toLocaleString();
+	}
+
+	// allow subtitle to be a number (or a string containing a number) and format it smartly
+	const subtitleText = useMemo(() => {
+		if (limit == null) return '';
+		if (typeof limit === 'number') return `Limit ${formatHumanNumber(limit)}`;
+		// if subtitle is a string, try to find a number inside and format it
+		if (typeof limit === 'string') {
+			const m = limit.match(/(-?\d[\d,\.]*)/);
+			if (m) {
+				const raw = m[1].replace(/,/g, '');
+				const n = Number(raw);
+				if (!Number.isNaN(n)) {
+					return limit.replace(m[1], formatHumanNumber(n));
+				}
+			}
+			return limit;
+		}
+		return String(limit);
+	}, [limit]);
 	const options = useMemo(() => {
 	// Define color stops for the gauge
 	const colorStops = [
@@ -38,7 +78,7 @@ export default function GrossNotionalLimit({
 	return {
 		type: 'radial-gauge',
 		title: { text: title, fontSize: 14 },
-		subtitle: subtitle ? { text: subtitle, fontSize: 12 } : undefined,
+		subtitle: subtitleText ? { text: subtitleText, fontSize: 12 } : undefined,
 		value,
 		scale: {
 		min,
@@ -61,7 +101,7 @@ export default function GrossNotionalLimit({
   			formatter: ({ value }) => `${value.toFixed(2)}%`
 		},
 	};
-	}, [value, min, max, title, subtitle, needleEnabled, needleProps]);
+	}, [value, min, max, title, subtitleText, needleEnabled, needleProps]);
 
 	const wrapperStyle = {
 		width,
