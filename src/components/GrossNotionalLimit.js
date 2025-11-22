@@ -10,6 +10,9 @@ export default function GrossNotionalLimit({
 	width = 260,
 	height = 200,
 	style = {},
+	// new props to control the needle
+	needleEnabled = true,
+	needleProps = {},
 }) {
 	const options = useMemo(() => ({
 		type: 'radial-gauge',
@@ -21,13 +24,14 @@ export default function GrossNotionalLimit({
 			max,
 			label: { enabled: false },
 		},
-		needle: { enabled: true },
+		// incorporate the enabled flag and any additional needle properties
+		needle: { enabled: needleEnabled, ...needleProps },
 		bar: { enabled: true },
 		innerRadiusRatio: 0.6,
 		startAngle: -120,
 		endAngle: 120,
-		label: { enabled: false },
-	}), [value, min, max, title, subtitle]);
+		label: { enabled: true, fontSize: 16, formatter: (params) => `${params.value.toFixed(2)}%` },
+	}), [value, min, max, title, subtitle, needleEnabled, needleProps]);
 
 	const wrapperStyle = {
 		width,
@@ -46,4 +50,3 @@ export default function GrossNotionalLimit({
 		</div>
 	);
 }
-
