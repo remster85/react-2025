@@ -78,20 +78,20 @@ export default function GrossBalanceSheet({ rowCount = 60 }) {
     { field: 'Counterparty', minWidth: 140, width: 200 },
     {
       headerName: 't-1',
-      headerClass: 'centered-header',
+      headerClass: 'header-t1',
       children: [
-        { field: 'Asset_t1', headerName: 'Asset', headerClass: 'centered-header', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
-        { field: 'Liabilities_t1', headerName: 'Liabilities', headerClass: 'centered-header', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
-        { field: 'Balance_t1', headerName: 'Balance', headerClass: 'centered-header', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
+        { field: 'Asset_t1', headerName: 'Asset', headerClass: 'header-t1', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
+        { field: 'Liabilities_t1', headerName: 'Liabilities', headerClass: 'header-t1', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
+        { field: 'Balance_t1', headerName: 'Balance', headerClass: 'header-t1', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
       ]
     },
     {
       headerName: 't0',
-      headerClass: 'centered-header',
+      headerClass: 'header-t0',
       children: [
-        { field: 'Asset_t0', headerName: 'Asset', headerClass: 'centered-header', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
-        { field: 'Liabilities_t0', headerName: 'Liabilities', headerClass: 'centered-header', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
-        { field: 'Balance_t0', headerName: 'Balance', headerClass: 'centered-header', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
+        { field: 'Asset_t0', headerName: 'Asset', headerClass: 'header-t0', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
+        { field: 'Liabilities_t0', headerName: 'Liabilities', headerClass: 'header-t0', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
+        { field: 'Balance_t0', headerName: 'Balance', headerClass: 'header-t0', aggFunc: 'sum', valueFormatter: numberFormatter, type: 'numericColumn', width: 140 },
       ]
     }
   ], []);
@@ -119,9 +119,37 @@ export default function GrossBalanceSheet({ rowCount = 60 }) {
         {/* inline CSS to center header labels, style the pinned total row, add column-group border and zebra row backgrounds */}
         <style>{`
           /* center header labels: apply broadly so group headers (t-1, t0) and child headers are centered */
-          .centered-header .ag-header-cell-label{display:flex;justify-content:center;align-items:center}
-          .centered-header .ag-header-group-cell-label{display:flex;justify-content:center;align-items:center}
-          .ag-theme-alpine .ag-header-group-cell-label, .ag-theme-alpine .ag-header-cell-label { display:flex; justify-content:center; align-items:center; text-align:center; }
+          .ag-theme-alpine .ag-header-group-cell-label { 
+            display:flex !important; 
+            justify-content:center !important; 
+            align-items:center !important; 
+            text-align:center !important;
+            width: 100% !important;
+          }
+          .ag-theme-alpine .ag-header-cell-label { 
+            display:flex !important; 
+            justify-content:center !important; 
+            align-items:center !important; 
+            text-align:center !important; 
+            width: 100% !important;
+          }
+          
+          /* background colors for column group headers */
+          .ag-theme-alpine .ag-header-group-cell.header-t1 {
+            background-color: #e5e5e5 !important;
+          }
+          .ag-theme-alpine .ag-header-group-cell.header-t0 {
+            background-color: #dbeafe !important;
+          }
+          
+          /* background colors for child column headers within groups */
+          .ag-theme-alpine .ag-header-cell.header-t1 {
+            background-color: #f3f3f3 !important;
+          }
+          .ag-theme-alpine .ag-header-cell.header-t0 {
+            background-color: #eff6ff !important;
+          }
+          
           /* emphasize the pinned bottom grand total */
           .ag-theme-alpine .ag-pinned-bottom-row {
             font-weight: 700;
