@@ -30,6 +30,15 @@
   margin-left:20px;
 }
 
+.recharts-wrapper * {
+  outline: none !important;
+}
+
+g:focus,
+path:focus {
+  outline: none !important;
+}
+
 .nav-link{ color: #cfe8ff; text-decoration:none; padding:6px 10px; border-radius:6px }
 .nav-link.active{ background: rgba(96,165,250,0.12); color: #60a5fa }
 

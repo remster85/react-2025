@@ -40,7 +40,7 @@ export default function BalanceSheet() {
           />
         </div>
 
-          <div style={{ width: 260, height: 250, boxSizing: 'border-box', border: '1px solid #ddd', borderRadius: 6, padding: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'transparent' }}>
+          <div style={{ width: 260, height: 250, boxSizing: 'border-box', border: '1px solid #ddd', borderRadius: 6, padding: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'transparent',   userSelect: 'none'}}  tabIndex={-1}>
             <HighYieldTotalGrossAssets value={6450987111} />
           </div>
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { PieChart, Pie, Cell } from 'recharts';
 
 export default function GrossNotionalLimitRecharts({
-  value = 80.22,
+  value = 10,
   width = 260,
   height = 200,
   title = 'Gross Notional Limit',
@@ -55,8 +55,9 @@ export default function GrossNotionalLimitRecharts({
         </PieChart>
 
         {/* Percentage text placed centered vertically near the lower-middle of the chart */}
-        <div style={{ position: 'absolute', left: 0, right: 0, top: '62%', textAlign: 'center', transform: 'translateY(-50%)', fontWeight: 700 }}>
-          <span style={{ fontSize: 14, color: '#333' }}>{v.toFixed(2)}%</span>
+        <div style={{ position: 'absolute', left: 0, right: 0, top: '62%', 
+          textAlign: 'center', transform: 'translateY(-50%)', fontWeight: 700,  }}  tabIndex={-1} userSelect="none" cursor="default">
+          <span style={{ fontSize: 14, color: '#333', userSelect: 'none' }}>{v.toFixed(2)}%</span>
         </div>
       </div>
     </div>

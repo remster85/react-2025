@@ -189,7 +189,7 @@ export default function GrossBalanceSheet({ rowCount = 60 }) {
             border-bottom: 1px solid #e8e8e8;
           }
         `}</style>
-            <div className="ag-theme-alpine" style={{ height: 420, width: '100%' }}>
+            <div className="ag-theme-alpine" style={{ height: 420, width: '80%' }}>
                 <AgGridReact
                 rowData={rowData}
                 columnDefs={columnDefs}
