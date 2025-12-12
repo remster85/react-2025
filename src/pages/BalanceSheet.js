@@ -3,7 +3,7 @@ import GrossNotionalLimit from '../components/GrossNotionalLimit';
 import GrossNotionalLimitRecharts from '../components/GrossNotionalLimitReCharts';
 import HighYieldTotalGrossAssets from '../components/HighYieldTotalGrossAssets';
 import GrossBalanceSheet from '../components/GrossBalanceSheet';
-
+import OvernightLiabilityConcentration from '../components/OvernightLiabilityConcentration';  
 export default function BalanceSheet() {
   const [value, setValue] = useState(30.22);
 
@@ -47,6 +47,12 @@ export default function BalanceSheet() {
         <div style={{ width: 260, height: 250, boxSizing: 'border-box', border: '1px solid #ddd', borderRadius: 6, padding: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <GrossNotionalLimitRecharts />
         </div>
+
+        
+        <div style={{ width: 260, height: 250, boxSizing: 'border-box', border: '1px solid #ddd', borderRadius: 6, padding: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <OvernightLiabilityConcentration />
+        </div>
+
       </div>
 
       <div style={{ marginTop: 20 }}>
