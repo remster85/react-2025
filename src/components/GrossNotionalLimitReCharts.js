@@ -91,9 +91,9 @@ export default function GrossNotionalLimitRecharts({
           </Pie>
         </PieChart>
 
-        <div style={{ position: 'absolute', left: 0, right: 0, top: '62%', 
+        <div style={{ position: 'absolute', left: 0, right: 0, top: '58%', marginLeft: 5, 
           textAlign: 'center', transform: 'translateY(-50%)', fontWeight: 700 }} tabIndex={-1}>
-          <span style={{ fontSize: 14, color: v > 100 ? '#000' : '#333', userSelect: 'none' }}>
+          <span style={{ fontSize: 20, color: v > 100 ? '#000' : '#333', userSelect: 'none' }}>
             {v.toFixed(2)}%
           </span>
         </div>
