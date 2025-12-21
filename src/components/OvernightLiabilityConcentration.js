@@ -9,6 +9,17 @@ export default function OvernightTermRatioChart({
   height = 200,
   title = 'Overnight Liability Concentration',
 }) {
+  // Color definitions
+  const item1_color = '#2196F3'; // Blue for overnight
+  const item2_color = '#FF9800'; // Orange for term
+  const ratio_over_limit_color = '#f44336'; // Red for exceeding limit
+  const ratio_under_limit_color = '#333'; // Dark gray for under limit
+  const label_color = '#666'; // Gray for labels
+  
+    // Label definitions
+  const item1_label = 'Overnight';
+  const item2_label = 'Term';
+  
   const total = overnight + term;
   const ratio = total > 0 ? (overnight / total) * 100 : 0;
   
@@ -16,11 +27,11 @@ export default function OvernightTermRatioChart({
   const exceedsLimit = ratio > limit;
 
   const data = [
-    { name: 'Overnight', value: overnight },
-    { name: 'Term', value: term }
+    { name: item1_label, value: overnight },
+    { name: item2_label, value: term }
   ];
 
-  const COLORS = ['#2196F3', '#FF9800']; // Blue for overnight, orange for term
+  const COLORS = [item1_color, item2_color];
 
   const cx = Math.round(width / 2);
   const cy = Math.round(height / 2) + 10; // Shift down slightly to account for title spacing
@@ -45,7 +56,7 @@ export default function OvernightTermRatioChart({
         {/* Title positioned above the chart */}
         <div style={{ position: 'absolute', top: 4, left: 0, right: 0, textAlign: 'center', pointerEvents: 'none' }}>
           <div style={{ fontSize: 12, fontWeight: 700 }}>{title}</div>
-          <div style={{ fontSize: 11, color: '#666', marginBottom: 12 }}>Limit {limit}%</div>
+          <div style={{ fontSize: 11, color: label_color, marginBottom: 12 }}>Limit {limit}%</div>
         </div>
 
         <div style={{ marginTop: 20, cursor: 'default' }}>
@@ -72,7 +83,7 @@ export default function OvernightTermRatioChart({
                   <text 
                     x={adjustedX} 
                     y={y} 
-                    fill="#666" 
+                    fill={label_color} 
                     textAnchor={adjustedX > cx ? 'start' : 'end'} 
                     dominantBaseline="central"
                     fontSize={11}
@@ -102,7 +113,7 @@ export default function OvernightTermRatioChart({
           transform: 'translateY(-50%)', 
           pointerEvents: 'none' 
         }}>
-          <div style={{ fontSize: 20, fontWeight: 700, color: exceedsLimit ? '#f44336' : '#333', userSelect: 'none' }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: exceedsLimit ? ratio_over_limit_color : ratio_under_limit_color, userSelect: 'none' }}>
             {ratio.toFixed(2)}%
           </div>
         </div>
